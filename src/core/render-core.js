@@ -142,12 +142,11 @@ async function render(_opts = {}) {
       const screenshotOpts = _.cloneDeep(_.omit(opts.screenshot, ['clip']));
       const clipContainsSomething = _.some(opts.screenshot.clip, val => !_.isUndefined(val));
       if (clipContainsSomething) {
-        screenshotOpts.clip = opts.screenshot.clip
+        screenshotOpts.clip = opts.screenshot.clip;
       }
 
       data = await page.screenshot(screenshotOpts);
     }
-
   } catch (err) {
     logger.error(`Error when rendering page: ${err}`);
     logger.error(err.stack);
