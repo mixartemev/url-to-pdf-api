@@ -51,7 +51,7 @@ function createRouter() {
 
   router.get('/favicon.ico', (req, res) => {
     // modify the url in any way you want
-    res.sendFile('/Users/mix/www/url-to-pdf-api/src/favicon.ico');
+    res.sendFile(`${__dirname}/favicon.ico`);
   });
 
   return router;
