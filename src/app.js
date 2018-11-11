@@ -23,7 +23,7 @@ function createApp() {
 
   if (!config.ALLOW_HTTP) {
     logger.info('All requests require HTTPS.');
-    // app.use(requireHttps());
+    app.use(requireHttps());
   } else {
     logger.info('ALLOW_HTTP=true, unsafe requests are allowed. Don\'t use this in production.');
   }
