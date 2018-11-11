@@ -33,7 +33,7 @@ function createRouter() {
       allowUnknownQuery: false,
     },
   };
-  router.get('/api/render', validate(getRenderSchema), render.getRender);
+  router.get('/', validate(getRenderSchema), render.getRender);
 
   const postRenderSchema = {
     body: renderBodySchema,
@@ -47,7 +47,7 @@ function createRouter() {
       contextRequest: true,
     },
   };
-  router.post('/api/render', validate(postRenderSchema), render.postRender);
+  router.post('/', validate(postRenderSchema), render.postRender);
 
   return router;
 }

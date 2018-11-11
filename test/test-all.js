@@ -15,14 +15,14 @@ BPromise.config({
 
 const app = createApp();
 
-describe('GET /api/render', () => {
+describe('GET /', () => {
   it('request must have "url" query parameter', () =>
-    request(app).get('/api/render').expect(400)
+    request(app).get('/').expect(400)
   );
 
   it('invalid cert should cause an error', () =>
     request(app)
-      .get('/api/render')
+      .get('/')
       .query({
         url: 'https://self-signed.badssl.com/',
       })
@@ -31,7 +31,7 @@ describe('GET /api/render', () => {
 
   it('invalid cert should not cause an error when ignoreHttpsErrors=true', () =>
     request(app)
-      .get('/api/render')
+      .get('/')
       .query({
         url: 'https://self-signed.badssl.com/',
         ignoreHttpsErrors: true,
@@ -40,10 +40,10 @@ describe('GET /api/render', () => {
   );
 });
 
-describe('POST /api/render', () => {
+describe('POST /', () => {
   it('body must have "url" attribute', () =>
     request(app)
-      .post('/api/render')
+      .post('/')
       .send({
         pdf: { scale: 2 },
       })
@@ -53,7 +53,7 @@ describe('POST /api/render', () => {
 
   it('render github.com should succeed', () =>
     request(app)
-      .post('/api/render')
+      .post('/')
       .send({ url: 'https://github.com' })
       .set('content-type', 'application/json')
       .set('Connection', 'keep-alive')
@@ -67,7 +67,7 @@ describe('POST /api/render', () => {
 
   it('html in json body should succeed', () =>
     request(app)
-      .post('/api/render')
+      .post('/')
       .send({ html: getResource('postmark-receipt.html') })
       .set('Connection', 'keep-alive')
       .set('content-type', 'application/json')
@@ -81,7 +81,7 @@ describe('POST /api/render', () => {
 
   it('html as text body should succeed', () =>
     request(app)
-      .post('/api/render')
+      .post('/')
       .send(getResource('postmark-receipt.html'))
       .set('Connection', 'keep-alive')
       .set('content-type', 'text/html')
@@ -99,7 +99,7 @@ describe('POST /api/render', () => {
 
   it('rendering large html should succeed', () =>
     request(app)
-      .post('/api/render')
+      .post('/')
       .send(getResource('large.html'))
       .set('content-type', 'text/html')
       .expect(200)
@@ -113,7 +113,7 @@ describe('POST /api/render', () => {
 
   it('rendering html with large linked images should succeed', () =>
     request(app)
-      .post('/api/render')
+      .post('/')
       .send(getResource('large-linked.html'))
       .set('content-type', 'text/html')
       .expect(200)
@@ -126,7 +126,7 @@ describe('POST /api/render', () => {
         }
 
         const length = Number(response.headers['content-length']);
-        chai.expect(length).to.be.above(30 * 1024 * 1);
+        chai.expect(length).to.be.above(30 * 1024);
       })
   );
 });
