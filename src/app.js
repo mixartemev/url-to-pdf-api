@@ -6,7 +6,7 @@ const cors = require('cors');
 const logger = require('./util/logger')(__filename);
 const errorResponder = require('./middleware/error-responder');
 const errorLogger = require('./middleware/error-logger');
-const requireHttps = require('./middleware/require-https');
+// const requireHttps = require('./middleware/require-https');
 const createRouter = require('./router');
 const config = require('./config');
 
