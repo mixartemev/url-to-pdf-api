@@ -10,7 +10,7 @@
 
 **⚠️ WARNING ⚠️** *Don't serve this API publicly to the internet unless you are aware of the
 risks. It allows API users to run any JavaScript code inside a Chrome session on the server.
-It's fairly easy to expose the contents of files on the server. You have been warned!. See https://github.com/mixartemev/url-to-pdf-api/issues/12 for background.*
+It's fairly easy to expose the contents of files on the server. You have been warned!. See https://github.com/alvarcarto/url-to-pdf-api/issues/12 for background.*
 
 **⭐️ Features:**
 
@@ -173,8 +173,8 @@ goto.networkIdleTimeout | number | `2000` | A timeout to wait before completing 
 pdf.scale | number | `1` | Scale of the webpage rendering.
 pdf.printBackground | boolean | `false`| Print background graphics.
 pdf.displayHeaderFooter | boolean | `false` | Display header and footer.
-pdf.headerTemplate | string | - | HTML template to use as the header of each page in the PDF. **Currently Puppeteer basically only supports a single line of text and you must use pdf.margins+CSS to make the header appear!** See https://github.com/mixartemev/url-to-pdf-api/issues/77.
-pdf.footerTemplate | string | - | HTML template to use as the footer of each page in the PDF. **Currently Puppeteer basically only supports a single line of text and you must use pdf.margins+CSS to make the footer appear!** See https://github.com/mixartemev/url-to-pdf-api/issues/77.
+pdf.headerTemplate | string | - | HTML template to use as the header of each page in the PDF. **Currently Puppeteer basically only supports a single line of text and you must use pdf.margins+CSS to make the header appear!** See https://github.com/alvarcarto/url-to-pdf-api/issues/77.
+pdf.footerTemplate | string | - | HTML template to use as the footer of each page in the PDF. **Currently Puppeteer basically only supports a single line of text and you must use pdf.margins+CSS to make the footer appear!** See https://github.com/alvarcarto/url-to-pdf-api/issues/77.
 pdf.landscape | boolean | `false` | Paper orientation.
 pdf.pageRanges | string | - | Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty string, which means print all pages.
 pdf.format | string | `A4` | Paper format. If set, takes priority over width or height options.
