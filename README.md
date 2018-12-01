@@ -310,6 +310,11 @@ First, clone the repository and cd into it.
 * Server runs at http://localhost:9000 or what `$PORT` env defines
 
 
+#### 3. Docker development
+* `docker build . -t pdf`
+* `docker run -p 9000:9000 pdf`
+
+
 ### Techstack
 
 * Node 8+ (async, await), written in ES7
