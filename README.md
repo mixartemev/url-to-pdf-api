@@ -307,12 +307,12 @@ First, clone the repository and cd into it.
 
 * `npm install`
 * `npm start` Start express server locally
-* Server runs at http://localhost:9000 or what `$PORT` env defines
-
 
 #### 3. Docker development
 * `docker build . -t pdf`
 * `docker run -p 9000:9000 pdf`
+
+Server runs at [http://localhost:9000](http://localhost:9000) or what `$PORT` env defines
 
 
 ### Techstack
