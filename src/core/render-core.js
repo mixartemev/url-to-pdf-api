@@ -81,15 +81,18 @@ async function render(_opts = {}) {
       await page.emulateMedia('screen');
     }
 
-    logger.info('Setting cookies..');
-    opts.cookies.map(async (cookie) => {
-      await page.setCookie(cookie);
-    });
+    if (opts.cookies && opts.cookies.length > 0) {
+      logger.info('Setting cookies..');
+
+      const client = await page.target().createCDPSession();
+
+      await client.send('Network.enable');
+      await client.send('Network.setCookies', { cookies: opts.cookies });
+    }
 
     if (opts.html) {
       logger.info('Set HTML ..');
-      // https://github.com/GoogleChrome/puppeteer/issues/728
-      await page.goto(`data:text/html;charset=UTF-8,${opts.html}`, opts.goto);
+      await page.setContent(opts.html, opts.goto);
     } else {
       logger.info(`Goto url ${opts.url} ..`);
       await page.goto(opts.url, opts.goto);

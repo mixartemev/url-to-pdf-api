@@ -54,6 +54,8 @@ and requests are direct connections to it.
 
 * Heavy pages may cause Chrome to crash if the server doesn't have enough RAM.
 
+* Docker wrapper for this can be found here: https://github.com/microbox/node-url-to-pdf-api
+
 
 ## Examples
 
@@ -93,6 +95,11 @@ https://pdfer2.herokuapp.com/?url=http://google.com&pdf.margin.top=2cm&pdf.margi
 
 https://pdfer2.herokuapp.com/?url=http://google.com&waitFor=1000
 
+
+**Download the PDF with a given attachment name**
+
+https://url-to-pdf-api.herokuapp.com/api/render?url=http://google.com&attachmentName=google.pdf
+
 **Wait for an element macthing the selector `input` appears.**
 
 https://pdfer2.herokuapp.com/?url=http://google.com&waitFor=input
@@ -112,7 +119,7 @@ curl -o html.pdf -XPOST -d@page.html -H"content-type: text/html" https://pdfer2.
 ## API
 
 To understand the API options, it's useful to know how [Puppeteer](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md)
-is internally used by this API. The [render code](https://github.com/mixartemev/url-to-pdf-api/blob/master/src/core/pdf-core.js#L26)
+is internally used by this API. The [render code](https://github.com/alvarcarto/url-to-pdf-api/blob/master/src/core/pdf-core.js#L26)
 is really simple, check it out. Render flow:
 
 1. **`page.setViewport(options)`** where options matches `viewport.*`.
@@ -120,7 +127,7 @@ is really simple, check it out. Render flow:
 3. Render url **or** html.
 
     If `url` is defined, **`page.goto(url, options)`** is called and options match `goto.*`.
-    Otherwise **``page.goto(`data:text/html,${html}`, options)``** is called where html is taken from request body. This workaround was found from [Puppeteer issue](https://github.com/GoogleChrome/puppeteer/issues/728).
+    Otherwise **`page.setContent(html, options)`** is called where html is taken from request body, and options match `goto.*`.
 
 4. *Possibly* **`page.waitFor(numOrStr)`** if e.g. `waitFor=1000` is set.
 5. *Possibly* **Scroll the whole page** to the end before rendering if e.g. `scrollPage=true` is set.
@@ -151,6 +158,7 @@ emulateScreenMedia | boolean | `true` | Emulates `@media screen` when rendering 
 ignoreHttpsErrors | boolean | `false` | Ignores possible HTTPS errors when navigating to a page.
 scrollPage | boolean | `false` | Scroll page down before rendering to trigger lazy loading elements.
 waitFor | number or string | - | Number in ms to wait before render or selector element to wait before render.
+attachmentName | string | - | When set, the `content-disposition` headers are set and browser will download the PDF instead of showing inline. The given string will be used as the name for the file.
 viewport.width | number | `1600` | Viewport width.
 viewport.height | number | `1200` | Viewport height.
 viewport.deviceScaleFactor | number | `1` | Device scale factor (could be thought of as dpr).
